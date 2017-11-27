@@ -94,40 +94,38 @@ public class GreenBoxesModel {
     }
 
     private void paintBox() {
-        int pos = (int) (Math.random() * ((double) this.blankBoxes));
-        int l = 0;
-        int last = height;
-        if (l <= last) {
-            int c;
-            int pos2;
+        int randomBox = (int) (Math.random() * ((double) this.blankBoxes));
+        int firstPosLn = 0;
+        int lastPosLn = height;
+        if (firstPosLn <= lastPosLn) {
+            int firstPosCl;
             loop0:
             while (true) {
-                c = 0;
-                int last2 = width;
-                if (c <= last2) {
+                firstPosCl = 0;
+                int lastPosCl = width;
+                if (firstPosCl <= lastPosCl) {
                     while (true) {
-                        if (!boardArray[l][c]) {
-                            pos2 = pos - 1;
-                            if (pos == 0) {
+                        if (!boardArray[firstPosLn][firstPosCl]) {
+                            if (randomBox == 0) {
                                 break loop0;
                             }
-                            pos = pos2;
+                            randomBox -= 1;
                         }
-                        if (c == last2) {
+                        if (firstPosCl == lastPosCl) {
                             break;
                         }
-                        c++;
+                        firstPosCl++;
                     }
                 }
-                if (l != last) {
-                    l++;
+                if (firstPosLn != lastPosLn) {
+                    firstPosLn++;
                 } else {
                     return;
                 }
             }
-            boardArray[l][c] = true;
-            this.lastPoint.set(c, l);
-            this.blankBoxes--;
+            boardArray[firstPosLn][firstPosCl] = true;
+            lastPoint.set(firstPosCl, firstPosLn);
+            blankBoxes--;
         }
     }
 
