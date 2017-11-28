@@ -44,7 +44,7 @@ public class GreenBoxesView extends View{
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (this.hidenTimer > ((long) 0)) {
-            if (System.currentTimeMillis() - this.hidenTimer < ((long) 1000)) {
+            if (System.currentTimeMillis() - this.hidenTimer < ((long) 500)) {
                 postInvalidateDelayed(100);
                 return;
             }
@@ -52,11 +52,11 @@ public class GreenBoxesView extends View{
         }
         initDims();
         int firstPosLn = 0;
-        int lastPosLn = model.getHeight()-1;
+        int lastPosLn = GreenBoxesModel.height-1;
         if (firstPosLn <= lastPosLn) {
             while (true) {
                 int firstPosCl = 0;
-                int lastPosCl = model.getWidth()-1;
+                int lastPosCl = GreenBoxesModel.width-1;
                 if (firstPosCl <= lastPosCl) {
                     while (firstPosCl <= lastPosCl) {
                         if (this.model.checkBoxPainted(firstPosLn, firstPosCl)) {
@@ -87,9 +87,10 @@ public class GreenBoxesView extends View{
             int heightLine = ((int) event.getY()) / Box.getHeight();
             int widthCol = ((int) event.getX()) / Box.getWidth();
             if (model.checkBoxPainted(heightLine, widthCol)) {
-                OnBoxTouch lst = this.model.getListener();
-                lst.playedMove(heightLine, widthCol);
-                invalidate();
+                OnBoxTouch lst = this.model.getOnBoxTouchListener();
+                if(lst != null){
+                    lst.playedMove(heightLine, widthCol);
+                }
                 return true;
             }
         }

@@ -13,7 +13,7 @@ import isel.poo.cvaz.boxes.View.OnGameOver;
  * Created by david on 24/11/2017.
  */
 
-public class GreenBoxesModel implements OnBoxTouch {
+public class GreenBoxesModel{
     public static int width = 2;
     public static int height = 3;
     private boolean[][] boardArray;
@@ -21,29 +21,10 @@ public class GreenBoxesModel implements OnBoxTouch {
     private int blankBoxes;
     private OnGameOver onGameOver;
     private final Point lastPoint = new Point(-1, -1);
+    private OnBoxTouch onBoxListener;
 
     public GreenBoxesModel(){
         init();
-    }
-
-    private final void setHeight(int height){
-        this.height = height;
-    }
-
-    public final int getHeight(){
-        return this.height;
-    }
-
-    private final void setWidth(int width){
-        this.width = width;
-    }
-
-    public final int getWidth(){
-        return this.width;
-    }
-
-    private final void setScore(int score){
-        this.score=score;
     }
 
     public final int getScore(){
@@ -55,8 +36,12 @@ public class GreenBoxesModel implements OnBoxTouch {
         this.onGameOver = listener;
     }
 
-    public final OnBoxTouch getListener() {
-        return this;
+    public final void setOnBoxListener(OnBoxTouch listener){
+        this.onBoxListener = listener;
+    }
+
+    public final OnBoxTouch getOnBoxTouchListener() {
+        return onBoxListener;
     }
 
     public final void save(OutputStream out) throws IOException{
@@ -75,7 +60,6 @@ public class GreenBoxesModel implements OnBoxTouch {
 
     private void resetGame(){
         this.score=0;
-        height = width = 2;
         init();
     }
 
@@ -85,7 +69,7 @@ public class GreenBoxesModel implements OnBoxTouch {
         init();
     }
 
-    @Override
+
     public final boolean playedMove(int h, int w){
         if (h == lastPoint.y && w == lastPoint.x) {
             score++;
@@ -96,10 +80,10 @@ public class GreenBoxesModel implements OnBoxTouch {
             }
             return true;
         }
+        resetGame();
         if (onGameOver != null) {
             onGameOver.gameOver(this.score);
         }
-        resetGame();
         return false;
     }
 
