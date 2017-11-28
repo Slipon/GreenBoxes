@@ -106,15 +106,15 @@ public class GreenBoxesModel implements OnBoxTouch {
     private void paintBox() {
         int randomBox = (int) (Math.random() * ((double) blankBoxes));
         int firstPosLn = 0;
-        int lastPosLn = height;
+        int lastPosLn = height-1;
         if (firstPosLn <= lastPosLn) {
             int firstPosCl;
             loop_label:
             while (true) {
                 firstPosCl = 0;
-                int lastPosCl = width;
+                int lastPosCl = width-1;
                 if (firstPosCl <= lastPosCl) {
-                    while (firstPosCl != lastPosCl) {
+                    while (firstPosCl <= lastPosCl) {
                         if (!boardArray[firstPosLn][firstPosCl]) {
                             if (randomBox == 0) {
                                 break loop_label;

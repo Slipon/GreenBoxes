@@ -44,7 +44,7 @@ public class GreenBoxesView extends View{
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (this.hidenTimer > ((long) 0)) {
-            if (System.currentTimeMillis() - this.hidenTimer < ((long) 500)) {
+            if (System.currentTimeMillis() - this.hidenTimer < ((long) 1000)) {
                 postInvalidateDelayed(100);
                 return;
             }
@@ -58,7 +58,7 @@ public class GreenBoxesView extends View{
                 int firstPosCl = 0;
                 int lastPosCl = model.getWidth()-1;
                 if (firstPosCl <= lastPosCl) {
-                    while (firstPosCl != lastPosCl) {
+                    while (firstPosCl <= lastPosCl) {
                         if (this.model.checkBoxPainted(firstPosLn, firstPosCl)) {
                             int x = firstPosCl * Box.getWidth();
                             int y = firstPosLn * Box.getHeight();
@@ -89,6 +89,7 @@ public class GreenBoxesView extends View{
             if (model.checkBoxPainted(heightLine, widthCol)) {
                 OnBoxTouch lst = this.model.getListener();
                 lst.playedMove(heightLine, widthCol);
+                invalidate();
                 return true;
             }
         }
