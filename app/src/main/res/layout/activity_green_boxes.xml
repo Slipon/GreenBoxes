@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/root"
     tools:context="isel.poo.cvaz.boxes.GreenBoxesActivity">
 
     <TextView
@@ -24,11 +25,11 @@
         android:gravity="center"
         android:textColor="@android:color/black" />
 
-    <LinearLayout
+    <isel.poo.cvaz.boxes.View.GreenBoxesView
         android:id="@+id/boxesLayout"
-        android:background="@android:color/darker_gray"
+        android:background="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
-    </LinearLayout>
+    </isel.poo.cvaz.boxes.View.GreenBoxesView>
 </LinearLayout>

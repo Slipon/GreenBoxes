@@ -7,20 +7,24 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import isel.poo.cvaz.boxes.View.OnBoxTouch;
+import isel.poo.cvaz.boxes.View.OnGameOver;
 
 /**
  * Created by david on 24/11/2017.
  */
 
-public class GreenBoxesModel {
-    public static int width;
-    public static int height;
+public class GreenBoxesModel implements OnBoxTouch {
+    public static int width = 2;
+    public static int height = 3;
     private boolean[][] boardArray;
     private int score;
     private int blankBoxes;
-    private OnBoxTouch listener;
+    private OnGameOver onGameOver;
     private final Point lastPoint = new Point(-1, -1);
 
+    public GreenBoxesModel(){
+        init();
+    }
 
     private final void setHeight(int height){
         this.height = height;
@@ -46,12 +50,13 @@ public class GreenBoxesModel {
         return this.score;
     }
 
-    public final void setListener(OnBoxTouch listener){
-        this.listener=listener;
+
+    public final void setEndGameListener(OnGameOver listener){
+        this.onGameOver = listener;
     }
 
     public final OnBoxTouch getListener() {
-        return this.listener;
+        return this;
     }
 
     public final void save(OutputStream out) throws IOException{
@@ -61,21 +66,26 @@ public class GreenBoxesModel {
         //TODO - DataInputStream
     }
 
-    public final void init(int height, int width){
-        this.height=height;
-        this.width=width;
-        //TODO
+    private void init(){
+        lastPoint.set(-1, -1);
+        this.boardArray = new boolean[height][width];
+        this.blankBoxes = height * width;
+        paintBox();
     }
 
-    private final void resetGame(){
+    private void resetGame(){
         this.score=0;
-        init(2,2);
+        height = width = 2;
+        init();
     }
 
-    private final void levelUp(){
-        //TODO
+    private void levelUp(){
+        int sumTo;
+        sumTo= (height-width <= 1) ? height++ : width++;
+        init();
     }
 
+    @Override
     public final boolean playedMove(int h, int w){
         if (h == lastPoint.y && w == lastPoint.x) {
             score++;
@@ -86,33 +96,30 @@ public class GreenBoxesModel {
             }
             return true;
         }
-        if (listener != null) {
-            listener.gameOver(this.score);
+        if (onGameOver != null) {
+            onGameOver.gameOver(this.score);
         }
         resetGame();
         return false;
     }
 
     private void paintBox() {
-        int randomBox = (int) (Math.random() * ((double) this.blankBoxes));
+        int randomBox = (int) (Math.random() * ((double) blankBoxes));
         int firstPosLn = 0;
         int lastPosLn = height;
         if (firstPosLn <= lastPosLn) {
             int firstPosCl;
-            loop0:
+            loop_label:
             while (true) {
                 firstPosCl = 0;
                 int lastPosCl = width;
                 if (firstPosCl <= lastPosCl) {
-                    while (true) {
+                    while (firstPosCl != lastPosCl) {
                         if (!boardArray[firstPosLn][firstPosCl]) {
                             if (randomBox == 0) {
-                                break loop0;
+                                break loop_label;
                             }
                             randomBox -= 1;
-                        }
-                        if (firstPosCl == lastPosCl) {
-                            break;
                         }
                         firstPosCl++;
                     }
@@ -127,6 +134,10 @@ public class GreenBoxesModel {
             lastPoint.set(firstPosCl, firstPosLn);
             blankBoxes--;
         }
+    }
+
+    public boolean checkBoxPainted(int h, int w){
+        return boardArray[h][w];
     }
 
 }

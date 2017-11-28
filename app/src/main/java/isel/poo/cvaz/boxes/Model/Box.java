@@ -9,10 +9,19 @@ import isel.poo.cvaz.boxes.View.GreenBoxesView;
  */
 
 public class Box {
-    private int BoxColor = Color.GREEN;
-    private int height = GreenBoxesView.viewHeight/ GreenBoxesModel.height;
-    private int width = GreenBoxesView.viewWidth/ GreenBoxesModel.width;
+    private static final int BoxColor = Color.GREEN;
+    private static final int height = GreenBoxesView.viewHeight/ GreenBoxesModel.height;
+    private static final int width = GreenBoxesView.viewWidth/ GreenBoxesModel.width;
 
+    public static int getHeight() {
+        return GreenBoxesView.viewHeight/ GreenBoxesModel.height;
+    }
 
+    public static int getWidth() {
+        return GreenBoxesView.viewWidth/ GreenBoxesModel.width;
+    }
 
+    public static int getBoxColor() {
+        return BoxColor;
+    }
 }

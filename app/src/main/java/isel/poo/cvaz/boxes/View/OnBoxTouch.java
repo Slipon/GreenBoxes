@@ -5,6 +5,6 @@ package isel.poo.cvaz.boxes.View;
  */
 
 public interface OnBoxTouch {
-    void gameOver(int score);
+    boolean playedMove(int h, int w);
 
 }
