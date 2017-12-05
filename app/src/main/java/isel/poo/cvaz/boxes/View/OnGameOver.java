@@ -6,4 +6,5 @@ package isel.poo.cvaz.boxes.View;
 
 public interface OnGameOver {
     void gameOver(int score);
+    void checkNewHighScore(int points);
 }

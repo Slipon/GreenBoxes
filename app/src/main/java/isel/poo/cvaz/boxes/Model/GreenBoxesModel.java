@@ -58,8 +58,10 @@ public class GreenBoxesModel{
         paintBox();
     }
 
-    private void resetGame(){
+    public void resetGame(){
         this.score=0;
+        height = 3;
+        width = 2;
         init();
     }
 
@@ -80,9 +82,10 @@ public class GreenBoxesModel{
             }
             return true;
         }
-        resetGame();
         if (onGameOver != null) {
             onGameOver.gameOver(this.score);
+            onGameOver.checkNewHighScore(this.score);
+
         }
         return false;
     }
