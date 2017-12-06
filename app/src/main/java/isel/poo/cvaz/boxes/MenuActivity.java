@@ -29,5 +29,12 @@ public class MenuActivity extends Activity {
                 startActivity(o);
             }
         });
+        final Button exit = findViewById(R.id.exit);
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finishAffinity();
+            }
+        });
     }
 }
