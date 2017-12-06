@@ -50,6 +50,11 @@
             android:background="@drawable/round_button_bkg"
             android:backgroundTint="@android:color/holo_blue_dark" />
 
+        <Space
+            android:layout_width="5dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0" />
+
         <Button
             android:id="@+id/orangeButton"
             android:layout_width="50dp"
@@ -58,12 +63,22 @@
             android:backgroundTint="@android:color/holo_orange_dark"
             />
 
+        <Space
+            android:layout_width="5dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0" />
+
         <Button
             android:id="@+id/redButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/round_button_bkg"
             android:backgroundTint="@android:color/holo_red_dark" />
+
+        <Space
+            android:layout_width="5dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0" />
 
         <Button
             android:id="@+id/greenButton"
