@@ -11,7 +11,7 @@
 
         <TextView
             android:id="@+id/optionsTitle"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:text="Options"
